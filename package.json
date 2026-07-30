@@ -1,0 +1,24 @@
+{
+  "name": "pi-jj-context",
+  "version": "0.1.0",
+  "description": "Adds Jujutsu repository guidance to Pi sessions.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "jujutsu",
+    "jj"
+  ],
+  "files": [
+    "extensions",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
