@@ -42,8 +42,7 @@ Then update the version in `package.json` for the next release.
 
 ## License
 
-Licenses under MIT.
+Licensed under MIT.
 
-
-- [jujutsu-url]: https://www.jj-vcs.dev/
-- [pi-url]: https://pi.dev
+[jujutsu-url]: https://www.jj-vcs.dev/
+[pi-url]: https://pi.dev
