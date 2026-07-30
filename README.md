@@ -1,23 +1,26 @@
 # pi-jj-context
 
-This is a [Pi package][pi-url] that, when Pi is started, checks the current 
-folder to see if it is in a [jujutsu][jujutsu-url] repo. If it is, 
-it adds the persistent custom message to the context saying:
+This is a [Pi package][pi-url] that, when Pi is started, checks the current
+folder to see if it is in a [jujutsu][jujutsu-url] repo. If it is, it adds the
+persistent custom message to the context saying:
 
 > Repository VCS policy: this is a Jujutsu repository. Use `jj` rather than
 > `git` for version-control operations, unless the user explicitly requests Git.
 
-The message is added once per session. It's not shown in the TUI, but you can 
-see it in the export. If
-compaction removes it from active context, the extension adds an equivalent
-ephemeral message to later model requests. 
+The message is added once per session. It's not shown in the TUI, but you can
+see it in the export. If compaction removes it from active context, the
+extension adds an equivalent ephemeral message to later model requests.
+
+The problem I want to solve is needing to add to AGENTS files something about
+checking if I'm using jj or git in a particular repo. Now the check for `jj` is
+done automatically, so no AGENTS edits are needed.
 
 ## Install
 
 Install globally from a Git repository:
 
 ```sh
-pi install git:git@github.com:TheRiver/pi-jj-context.git@v0.1.0
+pi install git:git@github.com:TheRiver/pi-jj-context.git@v0.1.1
 ```
 
 For local development:
