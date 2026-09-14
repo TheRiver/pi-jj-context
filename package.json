@@ -1,6 +1,6 @@
 {
     "name": "pi-jj-context",
-    "version": "0.1.1",
+    "version": "2.0.0",
     "description": "Adds Jujutsu repository guidance to Pi sessions.",
     "author": {
         "name": "Constance Neeser"

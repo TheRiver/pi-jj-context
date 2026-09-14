@@ -2,7 +2,7 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const CUSTOM_TYPE = "jj-context";
 const CONTENT =
-	"Repository VCS policy: this is a Jujutsu repository. Use `jj` rather than `git` for version-control operations, unless the user explicitly requests Git.";
+	"Repository VCS policy: this is a Jujutsu repository. Other repos may or may not be Jujutsu repositories themselves.";
 
 function contextMessage() {
 	return {
