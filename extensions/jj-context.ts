@@ -1,4 +1,4 @@
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 
 const CUSTOM_TYPE = "jj-context";
 const CONTENT =
@@ -21,6 +21,13 @@ function hasContextMessage(messages: ReadonlyArray<{ role: string; customType?: 
 export default function jjContextExtension(pi: ExtensionAPI) {
 	let isJujutsuRepository = false;
 
+	function ensureContextMessage(ctx: ExtensionContext) {
+		if (!isJujutsuRepository) return;
+		if (hasContextMessage(ctx.sessionManager.buildSessionProjection().messages)) return;
+
+		pi.sendMessage(contextMessage(), { triggerTurn: false });
+	}
+
 	pi.on("session_start", async (_event, ctx) => {
 		try {
 			const result = await pi.exec("jj", ["root"], { timeout: 1_000 });
@@ -29,22 +36,11 @@ export default function jjContextExtension(pi: ExtensionAPI) {
 			isJujutsuRepository = false;
 		}
 
-		if (!isJujutsuRepository) return;
-
-		const branchHasContext = ctx.sessionManager
-			.getBranch()
-			.some((entry) => entry.type === "custom_message" && entry.customType === CUSTOM_TYPE);
-
-		if (!branchHasContext) {
-			pi.sendMessage(contextMessage());
-		}
+		ensureContextMessage(ctx);
 	});
 
-	// Compaction can omit the persistent custom message from the active context.
-	// Add it back only to the outgoing request when that happens.
-	pi.on("context", (event) => {
-		if (!isJujutsuRepository || hasContextMessage(event.messages)) return;
-
-		return { messages: [...event.messages, contextMessage()] };
+	// Restore the policy persistently, rather than appending fresh input to every request.
+	pi.on("session_compact", (_event, ctx) => {
+		ensureContextMessage(ctx);
 	});
 }

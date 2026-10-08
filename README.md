@@ -4,12 +4,14 @@ This is a [Pi package][pi-url] that, when Pi is started, checks the current
 folder to see if it is in a [jujutsu][jujutsu-url] repo. If it is, it adds the
 persistent custom message to the context saying:
 
-> Repository VCS policy: this is a Jujutsu repository. Use `jj` rather than
-> `git` for version-control operations, unless the user explicitly requests Git.
+> Repository VCS policy: this is a Jujutsu repository. Other repos may or may
+> not be Jujutsu repositories themselves.
 
-The message is added once per session. It's not shown in the TUI, but you can
-see it in the export. If compaction removes it from active context, the
-extension adds an equivalent ephemeral message to later model requests.
+The message is persisted when missing from active context at session start.
+It's not shown in the TUI, but you can see it in the export. If compaction
+removes it from active context, the extension persists a replacement without
+triggering an assistant turn. Later model requests reuse that message rather
+than receiving a fresh ephemeral message each time.
 
 The problem I want to solve is needing to add to AGENTS files something about
 checking if I'm using jj or git in a particular repo. Now the check for `jj` is
