@@ -4,8 +4,10 @@ This is a [Pi package][pi-url] that, when Pi is started, checks the current
 folder to see if it is in a [jujutsu][jujutsu-url] repo. If it is, it adds the
 persistent custom message to the context saying:
 
-> Repository VCS policy: this is a Jujutsu repository. Other repos may or may
-> not be Jujutsu repositories themselves.
+> This local working copy uses Jujutsu (`jj`). Use `jj` for local version-control
+> operations here. This is not a project-wide VCS policy: collaborators may use
+> Git. Do not add Jujutsu requirements to shared instructions, documentation or
+> tooling based on this notice. Check other working copies independently.
 
 The message is persisted when missing from active context at session start.
 It's not shown in the TUI, but you can see it in the export. If compaction

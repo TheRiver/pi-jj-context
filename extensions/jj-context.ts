@@ -2,7 +2,7 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 
 const CUSTOM_TYPE = "jj-context";
 const CONTENT =
-	"Repository VCS policy: this is a Jujutsu repository. Other repos may or may not be Jujutsu repositories themselves.";
+	"This local working copy uses Jujutsu (`jj`). Use `jj` for local version-control operations here. This is not a project-wide VCS policy: collaborators may use Git. Do not add Jujutsu requirements to shared instructions, documentation or tooling based on this notice. Check other working copies independently.";
 
 function contextMessage() {
 	return {
@@ -39,7 +39,7 @@ export default function jjContextExtension(pi: ExtensionAPI) {
 		ensureContextMessage(ctx);
 	});
 
-	// Restore the policy persistently, rather than appending fresh input to every request.
+	// Restore the guidance persistently, rather than appending fresh input to every request.
 	pi.on("session_compact", (_event, ctx) => {
 		ensureContextMessage(ctx);
 	});
